@@ -1,0 +1,24 @@
+
+Copy code
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <form action="/tasks" method="post">
+        <label for="name">New Task:</label>
+        <input type="text" id="name" name="name" value="{{ form.name }}">
+        <input type="submit" value="Add Task">
+    </form>
+    <ul>
+    {% for task in my_tasks %}
+        <li>{{ task.name }} - {{ "Completed" if task.status else "Pending" }}</li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Home</a>
+</body>
+</html>
