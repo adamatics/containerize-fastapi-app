@@ -29,13 +29,13 @@ class NewTask(BaseModel):
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.get("/tasks", response_class=HTMLResponse)
 async def get_tasks(request: Request):
     form = NewTask(name="")
-    return templates.TemplateResponse("tasks.html", {"request": request, "my_tasks": my_tasks, "form": form})
+    return templates.TemplateResponse(request, "tasks.html", {"my_tasks": my_tasks, "form": form})
 
 
 @app.post("/tasks", response_class=HTMLResponse)
@@ -43,7 +43,7 @@ async def post_tasks(request: Request, name: str = Form(...)):
     new_task = Task(name=name, status=False)
     my_tasks.append(new_task)
     form = NewTask(name="")
-    return templates.TemplateResponse("tasks.html", {"request": request, "my_tasks": my_tasks, "form": form})
+    return templates.TemplateResponse(request, "tasks.html", {"my_tasks": my_tasks, "form": form})
 
 
 if __name__ == "__main__":
